@@ -17,7 +17,7 @@ class Receiver(nn.Module):
             nn.Linear(2 * n + 1, hid),
             nn.SELU(),
             nn.Linear(hid, 2),
-            nn.Softmax()
+            nn.LogSoftmax()
         )
     
     def forward(self, input):
@@ -38,7 +38,8 @@ class SenderActor(nn.Module):
         self.net = nn.Sequential(
             nn.Linear(2 * n, hid),
             nn.SELU(),
-            nn.Linear(hid, 1)
+            nn.Linear(hid, 1),
+            nn.Sigmoid()
         )
     
     def forward(self, input):
@@ -57,9 +58,9 @@ class SenderCritic(nn.Module):
         self.n = n
         self.hid = hid
         self.net = nn.Sequential(
-            nn.Linear(2 * n, hid),
+            nn.Linear(2 * n + 1, hid),
             nn.SELU(),
-            nn.Linear(hid, 1)
+            nn.Linear(hid, 1),
         )
     
     def forward(self, input):

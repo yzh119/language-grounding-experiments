@@ -24,7 +24,6 @@ class Game(object):
         return two_hot(self.n, x, y)
         
     def receiver_input(self, val):
-        assert -1e-8 < val < 1 + 1e-8
         if self.flip == 1: 
             self.target = 1 - self.target
             self.x, self.y = self.y, self.x
