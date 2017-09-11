@@ -147,6 +147,6 @@ import matplotlib.cm as cm
 
 colors = cm.rainbow(np.linspace(0, 1, n_numbers))
 for x, c in enumerate(colors):
-    for y in stat[x - 1]:
+    for y in stat[x]:
         plt.scatter(x, y, color=c)
 plt.savefig('viz.png')
