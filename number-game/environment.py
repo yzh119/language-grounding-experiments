@@ -20,7 +20,7 @@ class Game(object):
     def sender_input(self):
         x, y = np.random.choice(range(self.n), 2, replace=False)
         self.x, self.y = x, y
-        self.target = 0 if x > y else 1
+        self.target = 0
         return two_hot(self.n, x, y)
         
     def receiver_input(self, val):

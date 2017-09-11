@@ -15,9 +15,9 @@ class Receiver(nn.Module):
         self.hid = hid
         self.net = nn.Sequential(
             nn.Linear(2 * n + 1, hid),
-            nn.SELU(),
+            nn.ReLU(),
             nn.Linear(hid, hid),
-            nn.SELU(),
+            nn.ReLU(),
             nn.Linear(hid, 2),
             nn.LogSoftmax()
         )
@@ -39,9 +39,9 @@ class SenderActor(nn.Module):
         self.hid = hid
         self.net = nn.Sequential(
             nn.Linear(2 * n, hid),
-            nn.SELU(),
+            nn.ReLU(),
             nn.Linear(hid, hid),
-            nn.SELU(),
+            nn.ReLU(),
             nn.Linear(hid, 1),
             nn.Sigmoid()
         )
@@ -63,9 +63,9 @@ class SenderCritic(nn.Module):
         self.hid = hid
         self.net = nn.Sequential(
             nn.Linear(2 * n + 1, hid),
-            nn.SELU(),
+            nn.ReLU(),
             nn.Linear(hid, hid),
-            nn.SELU(),
+            nn.ReLU(),
             nn.Linear(hid, 1),
         )
     
