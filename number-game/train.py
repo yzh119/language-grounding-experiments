@@ -14,7 +14,7 @@ import logging
 bound = [0., 1.]
 
 # Hyper parameters
-explore_sigma = 0.005
+explore_sigma = 0.1
 n_r = 20 
 
 def explore_noise():
@@ -62,7 +62,6 @@ def update_module(mod_name):
         target_reward = torch.FloatTensor(reward).view(-1, 1)
         optim_sc.zero_grad()
         loss = F.mse_loss(predict_reward, Variable(target_reward))
-        print loss.data[0]
         loss.backward()
         optim_sc.step()
         
@@ -95,7 +94,7 @@ def update_module(mod_name):
     
     return sum(reward) / 32.
 
-n_numbers = 2
+n_numbers = 10
 n_hidden = 50
 n_games = 32
 game_pool = []
@@ -106,9 +105,9 @@ R = Receiver(n_numbers, n_hidden)
 SA = SenderActor(n_numbers, n_hidden)
 SC = SenderCritic(n_numbers, n_hidden)
 
-optim_r = optim.SGD(R.parameters(), lr=1e-5)
+optim_r = optim.SGD(R.parameters(), lr=1e-2)
 optim_sa = optim.SGD(SA.parameters(), lr=1e-4)
-optim_sc = optim.SGD(SC.parameters(), lr=1e-4)
+optim_sc = optim.SGD(SC.parameters(), lr=1e-3)
 
 running_succ_rate = 0.5
 for epoch in count(1):
