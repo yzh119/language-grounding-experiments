@@ -18,8 +18,11 @@ Note that the sender's policy is a real number, Deterministic Policy Gradient is
 
 # Result
 ## Real value representation of one-hot vectors
-n = 10
+<center>n = 10</center>
+
 ![](results/viz10.png)
-n = 50
+
+<center>n = 50</center>
 ![](results/viz50.png)
 
+The value in x-axis indicates the index of one in the corresponding one-hot vector.
