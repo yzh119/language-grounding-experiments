@@ -1,12 +1,14 @@
 # Number Game
-This framework includes two players, a sender and a receiver.
+Number game is a simplifed version of Wittgenstein's referential game. 
+
+This framework includes two players, a sender and a receiver. The target of the framework is to reach a consensus between two agents, about how to use a real number to denote an object.
 
 ## Game 1
 In this game, the sender is given two n-dim one-hot vectors and a target(left/right): (vL, vR, t), t in {vL, vR}.
 
 The sender need to send a real number to the receiver, we call this the sender's policy: s(vL, vR, t).
 
-The receiver does not know the target, but sees the sender's value, the shuffled ont-hot vectors and tries to guess the target, we call this the receiver's policy r(vL', vR', s(vL, vR, t)) \in {vL, vR}. (the vectors must be shuffled before sent to receiver because we need to prevent the situation that s(vL, vR, t) indicates whether to choose left or right).
+The receiver does not know the target, but sees the sender's value, the shuffled ont-hot vectors and tries to guess the target, we call this the receiver's policy r(vL', vR', s(vL, vR, t)) in {vL, vR}. (the vectors must be shuffled before sent to receiver because we need to prevent the situation that s(vL, vR, t) indicates whether to choose left or right).
 
 If r(vL', vR', s(vL, vR, t)) = t, both players receive a payoff of 1, otherwise, they receive a payoff of 0.
 
