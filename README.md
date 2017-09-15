@@ -1,12 +1,17 @@
 # emergence-of-natural-language
 To do experiments on using multi-agent system to simulate the emergence of natural language
 
+# Requirements
+
+- [training-monitor](https://github.com/yzh119/training_monitor) (To visualize the training process)
+
 ## First Experiment
 It's a simplified version of the [ICLR2017 paper](https://arxiv.org/pdf/1612.07182.pdf).
 
 [More details](number-game/README.md)
 
 ## Second Experiment
+
 
 # Reference
 

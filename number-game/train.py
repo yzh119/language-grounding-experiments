@@ -8,13 +8,18 @@ from model import *
 from itertools import count
 from torch.autograd import Variable
 import torch.optim as optim
+import training_monitor.logger as tmlog
 import numpy as np
 import argparse
+
+logger = tmlog.Logger('log')
 
 parser = argparse.ArgumentParser('Number Game')
 parser.add_argument('--number', '-n', type=int, default=10)
 parser.add_argument('--k', '-k', type=int, default=2)
 parser.add_argument('--cuda', action='store_true')
+parser.add_argument('--interval', type=int, default=10)
+parser.add_argument('--batch', type=int, default=32)
 args = parser.parse_args()
 
 bound = [0., 1.]
@@ -113,7 +118,7 @@ def update_module(mod_name):
     return sum(reward) / 32.
 
 n_hidden = 200
-n_games = 32
+n_games = args.batch
 game_pool = []
 for i in range(n_games):
     game_pool.append(Game(n_numbers, n_k))
@@ -139,11 +144,15 @@ for epoch in count(1):
     
     running_succ_rate = running_succ_rate * 0.95 + succ_rate * 0.05
     print('Epoch {}: successful_rate = {}'.format(epoch, running_succ_rate))
-    if running_succ_rate > 0.9:
+    
+    if epoch % args.interval == 0:
+        logger.add_scalar('succ_rate', running_succ_rate, epoch)
+    
+    if running_succ_rate > 0.95:
         break
 
 stat = [[] for _ in range(n_numbers)]
-for _ in range(100):
+for _ in range(50):
     for i in range(n_games):
         game_pool[i].reset()
     

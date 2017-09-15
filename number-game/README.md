@@ -18,26 +18,33 @@ We adopt the same algorithm as the one in [Multi-Agent Cooperation and the Emerg
 
 Note that the sender's policy is a real number, Deterministic Policy Gradient is required to learn the policy, in which we need the gradient of Q-function. To address this problem, we build an extra Critic network to fit the Q-function.
 
+Small batch-size(32) is encouraged when training, large batch-size may make the training faster but results in the worse presentation.
+
 ## Extension
-We could extend the number of vectors from 2 to k.
+We could extend the number of vectors from 2 to k. 
+
+The sender is given k n-dim vectors and a target, and the receiver tries to guess which one is the target.
+
 
 # Result
 ## Real value representation of one-hot vectors
 
-When k = 2:
-
-* n = 10:
+* n = 10, k = 2:
 
 ![](results/viz10.png)
 
-* n = 50:
+* n = 50, k = 2:
 
 ![](results/viz50.png)
 
 The value in x-axis indicates the index of one in the corresponding one-hot vector.
 
-When k = 5:
-
-* n = 10:
+* n = 10, k = 5:
 
 ![](results/viz.png)
+
+## Training curve
+
+* n = 10, k = 5, batch = 32
+
+![](results/curve.png)
