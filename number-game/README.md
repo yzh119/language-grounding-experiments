@@ -47,4 +47,4 @@ The value in x-axis indicates the index of one in the corresponding one-hot vect
 
 * n = 10, k = 5, batch = 32
 
-![](results/curve.png)
+![](results/curve.PNG)
