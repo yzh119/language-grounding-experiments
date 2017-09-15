@@ -1,33 +1,31 @@
 import numpy as np
-
-def two_hot(n, a, b):
-    ret = np.zeros(2 * n)
-    ret[[a, n + b]] = 1
+import random
+def k_hot(n, lst):
+    k = len(lst)
+    assert k > 0
+    ret = np.zeros(k * n)
+    ret[[i * n + x for i, x in enumerate(lst)]] = 1
     return ret
 
 class Game(object):
-    def __init__(self, n):
+    def __init__(self, n, k):
         self.n = n
+        self.k = k
         self.target = None
-        self.flip = None
-        self.x = None
-        self.y = None
+        self.states = []
         self.reset()
     
     def reset(self):
-        self.flip = np.random.randint(2)
+        self.states = np.random.choice(range(self.n), self.k, replace=False).tolist()
+        self.target = 0
     
     def sender_input(self):
-        x, y = np.random.choice(range(self.n), 2, replace=False)
-        self.x, self.y = x, y
-        self.target = 0
-        return two_hot(self.n, x, y)
+        return k_hot(self.n, self.states)
         
     def receiver_input(self, val):
-        if self.flip == 1: 
-            self.target = 1 - self.target
-            self.x, self.y = self.y, self.x
-        return np.concatenate((two_hot(self.n, self.x, self.y), [val]))
+        shuffled_index, shuffled_states = zip(*sorted(zip(range(self.k), self.states), key=lambda _: random.random()))
+        self.target = list(shuffled_index).index(0)
+        return np.concatenate((k_hot(self.n, shuffled_states), [val]))
     
     def reward(self, out):
         assert self.target is not None
@@ -37,7 +35,7 @@ class Game(object):
             return 0    
 
 if __name__ == '__main__':
-    g = Game(10)
+    g = Game(10, 3)
     print(g.sender_input())
     print(g.receiver_input(0.5))
     g.reset()

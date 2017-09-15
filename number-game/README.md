@@ -18,15 +18,26 @@ We adopt the same algorithm as the one in [Multi-Agent Cooperation and the Emerg
 
 Note that the sender's policy is a real number, Deterministic Policy Gradient is required to learn the policy, in which we need the gradient of Q-function. To address this problem, we build an extra Critic network to fit the Q-function.
 
+## Extension
+We could extend the number of vectors from 2 to k.
+
 # Result
 ## Real value representation of one-hot vectors
 
-n = 10:
+When k = 2:
+
+* n = 10:
 
 ![](results/viz10.png)
 
-n = 50:
+* n = 50:
 
 ![](results/viz50.png)
 
 The value in x-axis indicates the index of one in the corresponding one-hot vector.
+
+When k = 5:
+
+* n = 10:
+
+![](results/viz.png)
